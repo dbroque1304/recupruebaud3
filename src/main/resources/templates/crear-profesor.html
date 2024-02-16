@@ -1,0 +1,136 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/general.html :: bootstrap">
+    <meta charset="UTF-8">
+    <title th:text="#{crear} + ' ' + #{profesor}"></title>
+
+</head>
+<body>
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div id="contenedora" class="container">
+
+        <form th:action="@{/profesores/crear}" th:object="${profesor}" th:method="post">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <h1 th:text="#{crear} + ' ' + #{profesor}"></h1>
+                </div>
+            </div>
+
+            <div style="margin-top: 6px;" class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label th:text="#{nif}" class="font-weight-bold"></label>
+                        <input th:field="*{nif}" class="form-control" />
+                        <ul th:if="${#fields.hasErrors('nif')}" class="error">
+                            <li th:each="err : ${#fields.errors('nif')}" th:text="${err}" class="error"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 6px;" class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label th:text="#{nombre}" class="font-weight-bold"></label>
+                        <input th:field="*{nombre}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 6px;" class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label th:text="#{apellido1}" class="font-weight-bold"></label>
+                        <input th:field="*{apellido1}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 6px;" class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label th:text="#{apellido2}" class="font-weight-bold"></label>
+                        <input th:field="*{apellido2}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 6px;" class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label th:text="#{ciudad}" class="font-weight-bold"></label>
+                        <input th:field="*{ciudad}" class="form-control" />
+                        <ul th:if="${#fields.hasErrors('ciudad')}" class="error">
+                            <li th:each="err : ${#fields.errors('ciudad')}" th:text="${err}" class="error"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 6px;" class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label th:text="#{direccion}" class="font-weight-bold"></label>
+                        <input th:field="*{direccion}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 6px;" class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label th:text="#{telefono}" class="font-weight-bold"></label>
+                        <input th:field="*{telefono}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 6px;" class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label th:text="#{fecha_nacimiento}" class="font-weight-bold"></label>
+                        <input type="date" th:field="*{fecha_nacimiento}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 6px;" class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label th:text="#{tipo}" class="font-weight-bold"></label>
+                        <select th:field="*{tipo}" class="form-control">
+                            <option value="profesor">Profesor</option>
+                            <option value="catedratico">Catedrático</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 6px;" class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label th:text="#{departamento}" class="font-weight-bold"></label>
+                        <select th:field="*{departamento.id}" class="form-control">
+                            <option value="-1" th:text="#{seleccione_opcion}"></option>
+                            <option
+                                    th:value="${departamento.id}"
+                                    th:text="${ departamento.id + ' - ' + departamento.nombre}"
+                                    th:each="departamento:${departamentoList}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div style="margin-top: 6px;" class="row justify-content-center">
+                <div class="col-md-6">
+                    <button class="btn btn-primary d-block w-100" type="submit" th:text="#{crear}"></button>
+                </div>
+            </div>
+        </form>
+        <div style="margin-top: 6px;" class="row justify-content-center">
+            <form action="/profesores" method="get" class="col-md-6">
+                <button class="btn btn-primary d-block w-100" type="submit" th:text="#{volver}"></button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

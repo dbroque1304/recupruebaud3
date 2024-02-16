@@ -1,0 +1,74 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/general.html :: bootstrap">
+    <meta charset="UTF-8">
+    <title th:text="#{profesores}"></title>
+</head>
+<body>
+
+<div id="contenedora" class="container-fluid" style="float:none; margin: 0 auto;width: 95%;" >
+    <div class="clearfix">
+        <div style="float: left; width: 50%">
+            <h1 th:text="#{profesores}"></h1>
+        </div>
+        <div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
+
+            <div style="position: absolute; left: 39%; top : 39%;">
+
+                <form action="/profesores/crear" method="get">
+                    <input class="btn btn-primary" type="submit" th:value="#{crear}">
+                </form>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="clearfix">
+        <hr/>
+    </div>
+    <div th:class="row" style="align-items: center">
+        <div th:class="col-1" th:text="#{id}" ></div>
+        <div th:class="col-1" th:text="#{nif}" ></div>
+        <div th:class="col-1" th:text="#{nombre}" ></div>
+        <div th:class="col-1" th:text="#{apellido1}" ></div>
+        <div th:class="col-1" th:text="#{apellido2}" ></div>
+        <div th:class="col-1" th:text="#{ciudad}" ></div>
+        <div th:class="col-1" th:text="#{direccion}" ></div>
+        <div th:class="col-1" th:text="#{telefono}"></div>
+        <div th:class="col-1" th:text="#{fecha_nacimiento}"></div>
+        <div th:class="col" th:text="#{tipo}" ></div>
+        <div th:class="col" th:text="#{departamento}" ></div>
+
+    </div>
+    <div class="clearfix">
+        <hr/>
+    </div>
+
+    <div  th:class="row" th:each="profesor : ${profesorList}" style="margin-top: 6px; align-items: center; text-align: start">
+        <div th:class="col-1" th:text="${profesor.id}"></div>
+        <div th:class="col-1"  th:text="${profesor.nif}"></div>
+        <div th:class="col-1"  th:text="${profesor.nombre}"></div>
+        <div th:class="col-1"  th:text="${profesor.apellido1}"></div>
+        <div th:class="col-1"  th:text="${profesor.apellido2}"></div>
+        <div th:class="col-1"  th:text="${profesor.ciudad}"></div>
+        <div th:class="col-1"  th:text="${profesor.direccion}"></div>
+        <div th:class="col-1"  th:text="${profesor.telefono}"></div>
+        <div th:class="col-1"  th:text="${profesor.fecha_nacimiento}"></div>
+        <div th:class="col-1"  th:text="${profesor.tipo}"></div>
+        <div th:class="col-1"  th:text="${profesor.departamento.nombre}"></div>
+        <div th:class="col" style="width: auto;">
+            <form th:action="@{/profesor/__${profesor.id}__}" style="display: inline;">
+                <input class="btn btn-primary" type="submit" th:value="#{ver_detalles}" />
+            </form>
+            <form th:action="@{/profesor/editar/}+${profesor.id} " style="display: inline;">
+                <input class="btn btn-primary" type="submit" th:value="#{editar}" />
+            </form>
+            <form th:action="@{/profesor/borrar/}+${profesor.id} " method="post" style="display: inline;">
+                <input class="btn btn-danger" type ="submit" th:value="#{eliminar}" />
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
